@@ -11,7 +11,9 @@ namespace lockBox
             int upperRange = 9;
 
             string lockBox = "";
+            string userInput = "";
             int size = 4;
+            int counter = 0;
 
             for (int i = 0; i < size; i++)
             {
@@ -23,16 +25,14 @@ namespace lockBox
                 }
 
                 lockBox += nextNumber;
-            }
-
-            string userInput = "";
+            }          
 
             Console.WriteLine($"двух одинаковых цифр нет,");
             Console.WriteLine($"+ цифра на своем месте,");
             Console.WriteLine($"- цифра не на своем месте.");
             Console.WriteLine($"--------------------------");
             Console.WriteLine($"Подберите {size}х значный цифровой код:");
-            
+
             while (lockBox != userInput)
             {
                 userInput = "";
@@ -49,21 +49,26 @@ namespace lockBox
                 {
                     for (int j = 0; j < size; j++)
                     {
-                        if (lockBox[i] == userInput[j] && i == j)
+                        if (lockBox[i] == userInput[j])
                         {
-                            Console.Write($"+");
-                        }
-                        else if (lockBox[i] == userInput[j])
-                        {
-                            Console.Write($"-");
+                            if (i == j)
+                            {
+                                Console.Write($"+");
+                            }
+                            else
+                            {
+                                Console.Write($"-");
+                            }
                         }
                     }
                 }
 
+                counter++;
                 Console.WriteLine();
             }
 
             Console.WriteLine($"Код взломан: {lockBox}");
+            Console.WriteLine($"за {counter} попыток");
             Console.ReadKey();
         }
     }
