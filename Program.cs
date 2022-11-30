@@ -36,6 +36,7 @@ namespace lockBox
                 {
                     case EasyGameCommand:
                         Console.Clear();
+
                         lockBox = "";
                         counter = 0;
 
@@ -50,7 +51,7 @@ namespace lockBox
 
                             lockBox += nextNumber;
                         }
-                        Console.WriteLine($"{lockBox}");
+
                         Console.WriteLine($"Подберите {size}х значный цифровой код:");
 
                         while (lockBox != userInput)
@@ -68,13 +69,11 @@ namespace lockBox
                             for (int i = 0; i < size; i++)
                             {
                                 if (lockBox.Contains(userInput[i]) == false)
-                                {
-                                    //Console.WriteLine($"числа {userInput[i]} в коде нет");
+                                {                                    
                                     Console.Write($" ");
                                 }
                                 else
                                 {
-                                    //Console.WriteLine($"число {userInput[i]} в коде есть");
                                     if (lockBox[i] == userInput[i])
                                     {
                                         Console.Write($"+");
