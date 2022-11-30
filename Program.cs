@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace lockBox
 {
@@ -6,9 +7,10 @@ namespace lockBox
     {
         static void Main(string[] args)
         {
-            const string NewGameCommand = "1";
-            const string RulesOfGameCommand = "2";
-            const string ExitCommand = "3";
+            const string EasyGameCommand = "1";
+            const string HardGameCommand = "2";
+            const string RulesOfGameCommand = "3";
+            const string ExitCommand = "4";
 
             Random random = new Random();
             int lowerRange = 1;
@@ -25,13 +27,75 @@ namespace lockBox
                 Console.Clear();
                 Console.WriteLine($"игра Взлом пароля");
                 Console.WriteLine($"------++++-------");
-                Console.WriteLine($"{NewGameCommand}. Новая игра");
+                Console.WriteLine($"{EasyGameCommand}. Простая игра");
+                Console.WriteLine($"{HardGameCommand}. Сложная игра");
                 Console.WriteLine($"{RulesOfGameCommand}. Правила игры");
                 Console.WriteLine($"{ExitCommand}. Выход");
 
                 switch (Console.ReadLine())
                 {
-                    case NewGameCommand:
+                    case EasyGameCommand:
+                        Console.Clear();
+
+                        for (int i = 0; i < size; i++)
+                        {
+                            string nextNumber = "";
+
+                            while (lockBox.Contains(nextNumber))
+                            {
+                                nextNumber = Convert.ToString(random.Next(lowerRange, upperRange + 1));
+                            }
+
+                            lockBox += nextNumber;
+                        }
+
+                        Console.WriteLine($"Подберите {size}х значный цифровой код:");
+
+                        while (lockBox != userInput)
+                        {
+                            userInput = "";
+
+                            while (userInput.Length != 4)
+                            {
+                                userInput = Console.ReadLine();
+
+                                if (userInput.Length != 4)
+                                    Console.WriteLine($"введите 4 цифры");
+                            }
+
+                            for (int i = 0; i < size; i++)
+                            {
+                                for (int j = 0; j < size; j++)
+                                {
+                                    if (lockBox[i] == userInput[j])
+                                    {
+                                        if (i == j)
+                                        {
+                                            Console.Write($"+");
+                                        }
+                                        else
+                                        {
+                                            Console.Write($"-");
+                                        }
+                                    }
+
+                                }
+
+                                if (lockBox.Contains(userInput[i]) == false)
+                                {
+                                    Console.Write($" ");
+                                }
+                            }
+
+                            counter++;
+                            Console.WriteLine();
+                        }
+
+                        Console.WriteLine($"Код взломан: {lockBox}");
+                        Console.WriteLine($"за {counter} попыток");
+                        break;
+
+                    case HardGameCommand:
                         Console.Clear();
 
                         for (int i = 0; i < size; i++)
@@ -83,7 +147,7 @@ namespace lockBox
                         }
 
                         Console.WriteLine($"Код взломан: {lockBox}");
-                        Console.WriteLine($"за {counter} попыток");                        
+                        Console.WriteLine($"за {counter} попыток");
                         break;
 
                     case RulesOfGameCommand:
@@ -92,7 +156,7 @@ namespace lockBox
                         Console.WriteLine($"+ цифра на своем месте,");
                         Console.WriteLine($"- цифра не на своем месте.");
                         Console.WriteLine($"если цифры нет ничего не ставится");
-                        Console.WriteLine($"--------------------------");                        
+                        Console.WriteLine($"--------------------------");
                         break;
 
                     case ExitCommand:
