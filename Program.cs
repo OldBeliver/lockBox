@@ -36,6 +36,8 @@ namespace lockBox
                 {
                     case EasyGameCommand:
                         Console.Clear();
+                        lockBox = "";
+                        counter = 0;
 
                         for (int i = 0; i < size; i++)
                         {
@@ -48,7 +50,7 @@ namespace lockBox
 
                             lockBox += nextNumber;
                         }
-
+                        Console.WriteLine($"{lockBox}");
                         Console.WriteLine($"Подберите {size}х значный цифровой код:");
 
                         while (lockBox != userInput)
@@ -65,25 +67,22 @@ namespace lockBox
 
                             for (int i = 0; i < size; i++)
                             {
-                                for (int j = 0; j < size; j++)
-                                {
-                                    if (lockBox[i] == userInput[j])
-                                    {
-                                        if (i == j)
-                                        {
-                                            Console.Write($"+");
-                                        }
-                                        else
-                                        {
-                                            Console.Write($"-");
-                                        }
-                                    }
-
-                                }
-
                                 if (lockBox.Contains(userInput[i]) == false)
                                 {
+                                    //Console.WriteLine($"числа {userInput[i]} в коде нет");
                                     Console.Write($" ");
+                                }
+                                else
+                                {
+                                    //Console.WriteLine($"число {userInput[i]} в коде есть");
+                                    if (lockBox[i] == userInput[i])
+                                    {
+                                        Console.Write($"+");
+                                    }
+                                    else
+                                    {
+                                        Console.Write($"-");
+                                    }
                                 }
                             }
 
@@ -97,6 +96,9 @@ namespace lockBox
 
                     case HardGameCommand:
                         Console.Clear();
+
+                        lockBox = "";
+                        counter = 0;
 
                         for (int i = 0; i < size; i++)
                         {
