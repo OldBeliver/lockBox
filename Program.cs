@@ -52,6 +52,7 @@ namespace lockBox
                             lockBox += nextNumber;
                         }
 
+                        Console.WriteLine($"Простой уровень");
                         Console.WriteLine($"Подберите {size}х значный цифровой код:");
 
                         while (lockBox != userInput)
@@ -111,6 +112,7 @@ namespace lockBox
                             lockBox += nextNumber;
                         }
 
+                        Console.WriteLine($"Сложный уровень");
                         Console.WriteLine($"Подберите {size}х значный цифровой код:");
 
                         while (lockBox != userInput)
